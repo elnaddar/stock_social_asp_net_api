@@ -28,7 +28,7 @@ namespace api.Controllers
             return Ok(stocksDto);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "GetStockById")]
         public async Task<IActionResult> GetByIdAsync([FromRoute] int id)
         {
             var stock = await _repo.GetByIdAsync(id);
@@ -44,7 +44,7 @@ namespace api.Controllers
         {
             var stockModel = stockDto.ToStock();
             await _repo.CreateAsync(stockModel);
-            return CreatedAtAction(nameof(GetByIdAsync), new { id = stockModel.Id }, stockModel.ToStockDto());
+            return CreatedAtRoute("GetStockById", new { id = stockModel.Id }, stockModel.ToStockDto());
         }
 
         [HttpPut]
