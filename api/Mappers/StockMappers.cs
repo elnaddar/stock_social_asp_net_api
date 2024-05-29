@@ -24,7 +24,7 @@ namespace api.Mappers
             };
         }
 
-        public static Stock ToStock(this CreateStockRequestDto createDto)
+        public static Stock ToStock(this StockCreateDto createDto)
         {
             return new()
             {
@@ -37,7 +37,7 @@ namespace api.Mappers
             };
         }
 
-        public static void FromUpdateDto(this Stock stockModel, UpdateStockRequestDto updateDto)
+        public static void FromUpdateDto(this Stock stockModel, StockUpdateDto updateDto)
         {
             stockModel.Symbol = updateDto.Symbol;
             stockModel.CompanyName = updateDto.CompanyName;

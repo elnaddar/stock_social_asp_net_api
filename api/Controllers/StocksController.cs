@@ -40,7 +40,7 @@ namespace api.Controllers
         }
 
         [HttpPost(Name = "Stocks.Store")]
-        public async Task<IActionResult> CreateAsync([FromBody] CreateStockRequestDto stockDto)
+        public async Task<IActionResult> CreateAsync([FromBody] StockCreateDto stockDto)
         {
             var stockModel = stockDto.ToStock();
             await _repo.CreateAsync(stockModel);
@@ -48,7 +48,7 @@ namespace api.Controllers
         }
 
         [HttpPut("{id:int}", Name = "Stocks.Update")]
-        public async Task<IActionResult> UpdateAsync([FromRoute] int id, [FromBody] UpdateStockRequestDto stockDto)
+        public async Task<IActionResult> UpdateAsync([FromRoute] int id, [FromBody] StockUpdateDto stockDto)
         {
             var stockModel = await _repo.UpdateAsync(id, stockDto);
             if (stockModel is null)

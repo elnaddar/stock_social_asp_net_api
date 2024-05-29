@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace api.Dtos.Stock
 {
-    public class UpdateStockRequestDto
+    public class StockUpdateDto
     {
         [Required]
         [MaxLength(10)]
