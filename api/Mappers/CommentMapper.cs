@@ -29,5 +29,11 @@ namespace api.Mappers
                 StockId = stockId,
             };
         }
+
+        public static void FromUpdateDto(this Comment comment, CommentUpdateDto updateDto)
+        {
+            comment.Title = updateDto.Title;
+            comment.Content = updateDto.Content;
+        }
     }
 }
