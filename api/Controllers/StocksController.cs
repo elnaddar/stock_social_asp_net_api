@@ -47,8 +47,7 @@ namespace api.Controllers
             return CreatedAtRoute("Stocks.Show", new { id = stockModel.Id }, stockModel.ToStockDto());
         }
 
-        [HttpPut(Name = "Stocks.Update")]
-        [Route("{id}")]
+        [HttpPut("{id}", Name = "Stocks.Update")]
         public async Task<IActionResult> UpdateAsync([FromRoute] int id, [FromBody] UpdateStockRequestDto stockDto)
         {
             var stockModel = await _repo.UpdateAsync(id, stockDto);
