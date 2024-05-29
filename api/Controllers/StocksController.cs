@@ -6,6 +6,7 @@ using api.Data;
 using api.Dtos.Stock;
 using api.Interfaces;
 using api.Mappers;
+using api.Queries;
 using Microsoft.AspNetCore.Mvc;
 
 namespace api.Controllers
@@ -21,9 +22,9 @@ namespace api.Controllers
         }
 
         [HttpGet(Name = "Stocks.Index")]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll([FromQuery] StockQuery query)
         {
-            var stocks = await _repo.GetAllAsync();
+            var stocks = await _repo.GetAllAsync(query);
             var stocksDto = stocks.Select(s => s.ToStockDto());
             return Ok(stocksDto);
         }
