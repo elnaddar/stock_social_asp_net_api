@@ -15,8 +15,7 @@ namespace api.Dtos.Stock
         [MaxLength(50)]
         public string CompanyName { get; set; } = string.Empty;
         [Required]
-        [Range(0, 1_000_000_000_000_000)]
-        [DeniedValues([0])]
+        [Range(0.000000001, 1_000_000_000_000_000)]
         public decimal Purchase { get; set; }
         [Required]
         [Range(0.001, 100)]
