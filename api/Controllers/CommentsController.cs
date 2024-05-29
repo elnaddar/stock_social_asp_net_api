@@ -10,7 +10,7 @@ namespace api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class CommentController(ICommentRepository repo) : ControllerBase
+    public class CommentsController(ICommentRepository repo) : ControllerBase
     {
         private readonly ICommentRepository _repo = repo;
 

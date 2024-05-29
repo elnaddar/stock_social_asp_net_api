@@ -12,10 +12,10 @@ namespace api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class StockController : ControllerBase
+    public class StocksController : ControllerBase
     {
         private readonly IStockRepository _repo;
-        public StockController(IStockRepository repo)
+        public StocksController(IStockRepository repo)
         {
             _repo = repo;
         }
