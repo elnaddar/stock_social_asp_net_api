@@ -46,5 +46,16 @@ namespace api.Controllers
             await _repo.CreateAsync(comment);
             return CreatedAtRoute("Comments.Show", new { id = comment.Id }, comment.ToCommentDto());
         }
+
+        [HttpPut("{id}", Name = "Comments.Update")]
+        public async Task<IActionResult> Update([FromRoute] int id, [FromBody] CommentUpdateDto requestComment)
+        {
+            var comment = await _repo.UpdateAsync(id, requestComment);
+            if (comment is null)
+            {
+                return NotFound();
+            }
+            return Ok(comment.ToCommentDto());
+        }
     }
 }
