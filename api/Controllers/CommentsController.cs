@@ -14,12 +14,23 @@ namespace api.Controllers
     {
         private readonly ICommentRepository _repo = repo;
 
-        [HttpGet]
+        [HttpGet(Name = "Comments.Index")]
         public async Task<IActionResult> GetAll()
         {
             var comments = await _repo.GetAllAsync();
             var commentsDto = comments.Select(c => c.ToCommentDto());
             return Ok(comments);
+        }
+
+        [HttpGet("{id}", Name = "Comments.Show")]
+        public async Task<IActionResult> Show([FromRoute] int id)
+        {
+            var comment = await _repo.GetByIdAsync(id);
+            if (comment is null)
+            {
+                return NotFound();
+            }
+            return Ok(comment);
         }
     }
 }
