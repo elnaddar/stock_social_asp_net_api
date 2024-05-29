@@ -24,7 +24,7 @@ namespace api.Controllers
             return Ok(comments);
         }
 
-        [HttpGet("{id}", Name = "Comments.Show")]
+        [HttpGet("{id:int}", Name = "Comments.Show")]
         public async Task<IActionResult> Show([FromRoute] int id)
         {
             var comment = await _repo.GetByIdAsync(id);
@@ -35,7 +35,7 @@ namespace api.Controllers
             return Ok(comment);
         }
 
-        [HttpPost("{stockId}", Name = "Comments.Store")]
+        [HttpPost("{stockId:int}", Name = "Comments.Store")]
         public async Task<IActionResult> Post([FromRoute] int stockId, [FromBody] CommentCreateDto requestComment)
         {
             if (!await _stockRepo.IsExistsAsync(stockId))
@@ -47,7 +47,7 @@ namespace api.Controllers
             return CreatedAtRoute("Comments.Show", new { id = comment.Id }, comment.ToCommentDto());
         }
 
-        [HttpPut("{id}", Name = "Comments.Update")]
+        [HttpPut("{id:int}", Name = "Comments.Update")]
         public async Task<IActionResult> Update([FromRoute] int id, [FromBody] CommentUpdateDto requestComment)
         {
             var comment = await _repo.UpdateAsync(id, requestComment);
@@ -58,7 +58,7 @@ namespace api.Controllers
             return Ok(comment.ToCommentDto());
         }
 
-        [HttpDelete("{id}", Name = "Commens.Destroy")]
+        [HttpDelete("{id:int}", Name = "Commens.Destroy")]
         public async Task<IActionResult> Destroy([FromRoute] int id)
         {
             var comment = await _repo.DeleteAsync(id);
