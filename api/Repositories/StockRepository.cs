@@ -35,10 +35,10 @@ namespace api.Repositories
         }
 
         public async Task<List<Stock>> GetAllAsync()
-        => await _context.Stocks.ToListAsync();
+        => await _context.Stocks.Include(c => c.Comments).ToListAsync();
 
         public async Task<Stock?> GetByIdAsync(int id)
-        => await _context.Stocks.FindAsync(id);
+        => await _context.Stocks.Include(c => c.Comments).FirstOrDefaultAsync(s => s.Id == id);
 
         public async Task<Stock?> UpdateAsync(int id, UpdateStockRequestDto stockDto)
         {
