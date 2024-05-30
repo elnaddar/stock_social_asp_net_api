@@ -1,7 +1,9 @@
 using api.Data;
 using api.Interfaces;
+using api.Models;
 using api.Repositories;
 using DotNetEnv;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 Env.Load();
@@ -24,6 +26,16 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     var connectionString = Environment.GetEnvironmentVariable("DefaultConnection");
     options.UseSqlServer(connectionString);
 });
+
+builder.Services.AddIdentity<User, IdentityRole>(options =>
+{
+    options.Password.RequireDigit = true;
+    options.Password.RequireLowercase = true;
+    options.Password.RequireUppercase = true;
+    options.Password.RequireNonAlphanumeric = true;
+    options.Password.RequiredLength = 12;
+})
+.AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddScoped<IStockRepository, StockRepository>();
 builder.Services.AddScoped<ICommentRepository, CommentRepository>();
