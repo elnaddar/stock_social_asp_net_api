@@ -9,6 +9,7 @@ using api.Mappers;
 using api.Models;
 using api.Queries;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Dynamic.Core;
 
 namespace api.Repositories
 {
@@ -49,6 +50,11 @@ namespace api.Repositories
             if (!string.IsNullOrWhiteSpace(query.Industry))
             {
                 stocks = stocks.Where(s => s.Industry == query.Industry);
+            }
+            if (!string.IsNullOrWhiteSpace(query.SortBy))
+            {
+                var sortDirection = query.IsAscending ? "asc" : "desc";
+                stocks = stocks.OrderBy($"{query.SortBy} {sortDirection}");
             }
             return await stocks.ToListAsync();
         }
