@@ -8,6 +8,7 @@ using api.Interfaces;
 using api.Mappers;
 using api.Queries;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 
 namespace api.Controllers
 {
@@ -25,6 +26,10 @@ namespace api.Controllers
         public async Task<IActionResult> GetAll([FromQuery] StockQuery query)
         {
             var stocks = await _repo.GetAllAsync(query);
+            if (stocks.IsNullOrEmpty())
+            {
+                return BadRequest("Empty response.");
+            }
             var stocksDto = stocks.Select(s => s.ToStockDto());
             return Ok(stocksDto);
         }
