@@ -56,7 +56,8 @@ namespace api.Repositories
                 var sortDirection = query.IsAscending ? "asc" : "desc";
                 stocks = stocks.OrderBy($"{query.SortBy} {sortDirection}");
             }
-            return await stocks.ToListAsync();
+            var skipNumber = (int)(query.PageNumber - 1) * query.PageSize;
+            return await stocks.Skip(skipNumber).Take(query.PageSize).ToListAsync();
         }
 
         public async Task<Stock?> GetByIdAsync(int id)

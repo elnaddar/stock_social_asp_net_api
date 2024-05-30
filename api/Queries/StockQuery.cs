@@ -14,5 +14,9 @@ namespace api.Queries
         [AllowedValues("", null, "Symbol", "CompanyName", "Purchase", "LastDiv", "Industry", "MarketCap")]
         public string? SortBy { get; set; } = null;
         public bool IsAscending { get; set; } = true;
+        [Range(1, uint.MaxValue)]
+        public uint PageNumber { get; set; } = 1;
+        [Range(1, byte.MaxValue)]
+        public byte PageSize { get; set; } = 20;
     }
 }
