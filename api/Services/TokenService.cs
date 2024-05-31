@@ -27,7 +27,7 @@ namespace api.Services
                 Subject = new(claims),
                 Expires = DateTime.Now.AddDays(7),
                 SigningCredentials = creds,
-                Issuer = Environment.GetEnvironmentVariable("JWT_ISSUER_SIGNING_KEY")!,
+                Issuer = Environment.GetEnvironmentVariable("JWT_ISSUER")!,
                 Audience = Environment.GetEnvironmentVariable("JWT_AUDIENCE")!
             };
 
