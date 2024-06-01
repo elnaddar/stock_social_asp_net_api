@@ -7,6 +7,7 @@ using api.Dtos.Stock;
 using api.Interfaces;
 using api.Mappers;
 using api.Queries;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 
@@ -14,6 +15,7 @@ namespace api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class StocksController : ControllerBase
     {
         private readonly IStockRepository _repo;

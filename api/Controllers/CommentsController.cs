@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using api.Dtos.Comment;
 using api.Interfaces;
 using api.Mappers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace api.Controllers
@@ -36,6 +37,7 @@ namespace api.Controllers
         }
 
         [HttpPost("{stockId:int}", Name = "Comments.Store")]
+        [Authorize]
         public async Task<IActionResult> Post([FromRoute] int stockId, [FromBody] CommentCreateDto requestComment)
         {
             if (!await _stockRepo.IsExistsAsync(stockId))
@@ -48,6 +50,7 @@ namespace api.Controllers
         }
 
         [HttpPut("{id:int}", Name = "Comments.Update")]
+        [Authorize]
         public async Task<IActionResult> Update([FromRoute] int id, [FromBody] CommentUpdateDto requestComment)
         {
             var comment = await _repo.UpdateAsync(id, requestComment);
@@ -59,6 +62,7 @@ namespace api.Controllers
         }
 
         [HttpDelete("{id:int}", Name = "Commens.Destroy")]
+        [Authorize]
         public async Task<IActionResult> Destroy([FromRoute] int id)
         {
             var comment = await _repo.DeleteAsync(id);
